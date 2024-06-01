@@ -1,0 +1,115 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    font-size: 62.5%;
+    font-family: "Poppins", sans-serif;
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  .signup::before {
+    width: 10rem;
+    height: 8rem;
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    transform: translate(-90%, -90%);
+    transition: all 0.3s ease-out;
+    overflow: hidden;
+    border-radius: 100%;
+  }
+
+  .signup:hover::before {
+    transform: translate(-8%, -25%);
+  }
+  .scrollbar-light::-webkit-scrollbar {
+    width: 0.8rem;
+    display: none;
+  }
+
+  .scrollbar-light:hover::-webkit-scrollbar {
+    display: block;
+  }
+
+  .scrollbar-light::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-light::-webkit-scrollbar-thumb {
+    background-color: rgba(61, 61, 61, 0.39);
+    border-radius: 10px;
+    cursor: grab;
+  }
+
+  #searchExp::-webkit-search-cancel-button {
+    display: none;
+  }
+
+  /* ----> Responsive Screen <---- */
+
+  /* ----> Mobile Small <---- */
+  @media (max-width: 375px) {
+    html {
+      font-size: 7.4px;
+    }
+  }
+
+  /* ----> Mobile Regular <---- */
+  @media (376px <= width <= 479px) {
+    html {
+      font-size: 7.8px;
+    }
+  }
+
+  /* ----> Mobile Large OR Tablet Small <---- */
+  @media (480px <= width <= 639px) {
+    html {
+      font-size: 8.2px;
+    }
+  }
+
+  /* ----> Tablet Medium <---- */
+  @media (640px <= width <= 767px) {
+    html {
+      font-size: 8.6px;
+    }
+  }
+
+  /* ----> Tablet Large OR Laptop Small <---- */
+  @media (768px <= width <= 900px) {
+    html {
+      font-size: 9px;
+    }
+  }
+
+  /* ----> Laptop Medium <---- */
+  @media (901px <= width <= 1024px) {
+    html {
+      font-size: 8.2px;
+    }
+  }
+
+  @media (1025px <= width <= 1099px) {
+    html {
+      font-size: 8.8px;
+    }
+  }
+
+  /* ----> Laptop Large <---- */
+  @media (1100px <= width <= 1200px) {
+    html {
+      font-size: 9.4px;
+    }
+  }
+}
