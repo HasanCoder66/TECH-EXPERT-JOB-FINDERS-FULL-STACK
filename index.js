@@ -56,10 +56,19 @@ app.use(
   })
 );
 
-// middlewares =====>
-app.get("/", (req, res) => {
-  res.send("Hello, world!");
+// Connect Client Side
+app.use(express.static(path.join(__dirname, "./client/dist")));
+
+app.get("*", function (_, res) {
+  res.sendFile(path.join(__dirname, "./client/dist/index.html"), (err) => {
+    res.status(500).send(err);
+  });
 });
+
+// middlewares =====>
+// app.get("/", (req, res) => {
+//   res.send("Hello, world!");
+// });
 app.use("/api/auth", UserRoute);
 app.use("/api/myCv", cvRoute);
 app.use("/api/website", websiteRoute);
@@ -72,14 +81,7 @@ app.use("/api/blog", blogRoutes);
 app.use("/api/feedback", feedbackRoutes);
 app.use("/api/upload", uploadRoute);
 
-// Connect Client Side
-app.use(express.static(path.join(__dirname, "./client/dist")));
 
-app.get("*", function (_, res) {
-  res.sendFile(path.join(__dirname, "./client/dist/index.html"), (err) => {
-    res.status(500).send(err);
-  });
-});
 
 //Error Middleware ====>
 app.use((err, req, res, next) => {
