@@ -17,30 +17,30 @@ const { genSalt, hash } = bcryptjs;
     // console.log(req.body.password, 'req.body.password ====>')
   
     try {
-      const salt = await genSalt(12);
-      const hashedPassword = await hash(req.body.password, salt);
+      // const salt = await genSalt(12);
+      // const hashedPassword = await hash(req.body.password, salt);
   
-      // const email = req.body.email;
+      // // const email = req.body.email;
   
-      const newUser = new User({
-        username: req.body.username,
-        email: req.body.email,
-        // password: req.body.password,
-        password: hashedPassword,
-      });
+      // const newUser = new User({
+      //   username: req.body.username,
+      //   email: req.body.email,
+      //   // password: req.body.password,
+      //   password: hashedPassword,
+      // });
   
-      // console.log(newUser)
+      // // console.log(newUser)
   
-      //REMOVING CRITICAL INFO FROM THE DATA TO SEND THE RESPONSE
-      // console.log(newUser);
-      const { password, ...others } = newUser._doc; //
+      // //REMOVING CRITICAL INFO FROM THE DATA TO SEND THE RESPONSE
+      // // console.log(newUser);
+      // const { password, ...others } = newUser._doc; //
   
-      await newUser.save();
+      // await newUser.save();
       let message = "User Create Successfully";
       res.status(200).json({
         status: "Success",
         message: message,
-        data: others,
+        // data: others,
       });
     } catch (error) {
       next(createError(error.status, error.message));
