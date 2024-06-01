@@ -73,10 +73,10 @@ app.use("/api/feedback", feedbackRoutes);
 app.use("/api/upload", uploadRoute);
 
 // Connect Client Side
-app.use(express.static(path.join(__dirname, "./client/build")));
+app.use(express.static(path.join(__dirname, "./client/dist")));
 
 app.get("*", function (_, res) {
-  res.sendFile(path.join(__dirname, "./client/build/index.html"), (err) => {
+  res.sendFile(path.join(__dirname, "./client/dist/index.html"), (err) => {
     res.status(500).send(err);
   });
 });
