@@ -20,7 +20,7 @@ import path from "path";
 import Stripe from "stripe";
 
 const __dirname = path.resolve();
-const MONGO = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.oahrmzf.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
+const MONGO = process.env.MONGO_URI
 const stripe = new Stripe(process.env.STRIPE);
 
 dotenv.config();
