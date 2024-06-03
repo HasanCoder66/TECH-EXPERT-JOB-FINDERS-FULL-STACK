@@ -61,52 +61,140 @@ function SignUpForm() {
     .match(
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     )) {
-
+  
       Swal.fire({
         icon: "error",
         title: "Oops...",
         text: "Email is Not Valid!",
       });
-
-  } else {
-      // console.log("signup handler is working");
+  
+    } else {
       const userCredential = {
         username: fullName,
         email,
         password,
       };
-      // console.log(userCredential);
-
+  
       try {
         const response = await axios.post(`/api/${SIGNUP_URL}`, userCredential);
         console.log(response.data.data);
-        // .data.data
+  
         dispatch(signupSuccess(response.data.data));
-
+  
         if (response.statusText === "OK") {
           Swal.fire({
             title: "Good job!",
-            text: "user SignUp successfully!",
+            text: "User SignUp successfully!",
             icon: "success",
           });
-
+  
           setTimeout(() => {
             navigate("/app");
           }, 3000);
         }
       } catch (error) {
         console.log(error);
-        console.log(error.response.data.message.includes('duplicate key'));
-        if(error.response.data.message.includes('duplicate key')){
+  
+        // Ensure error.response.data.message is defined before calling includes
+        const errorMessage = error.response?.data?.message || "";
+        if (errorMessage.includes('duplicate key')) {
           Swal.fire({
             icon: "error",
             title: "Oops...",
-            text: `Email Already Registered`,
+            text: "Email Already Registered",
+          });
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: errorMessage,
           });
         }
       }
     }
   };
+  
+  // const signupHandlerWithMongoDb = async (e) => {
+  //   e.preventDefault();
+  //   if (
+  //     email === "" ||
+  //     fullName === "" ||
+  //     password === "" ||
+  //     cPassword === ""
+  //   ) {
+  //     Swal.fire({
+  //       icon: "error",
+  //       title: "Oops...",
+  //       text: "Missing Fields!",
+  //     });
+  //   } else if (password.length < 8) {
+  //     Swal.fire({
+  //       icon: "error",
+  //       title: "Oops...",
+  //       text: "Password must be at least 8 characters long!",
+  //     });
+  //   } else if (password.length < 8) {
+  //     Swal.fire({
+  //       icon: "error",
+  //       title: "Oops...",
+  //       text: "Password must be at least 8 characters long!",
+  //     });
+  //   } else if (password !== cPassword) {
+  //     Swal.fire({
+  //       icon: "error",
+  //       title: "Oops...",
+  //       text: "Password does not match!",
+  //     });
+  //   } else if (email != '' && !email.toLowerCase()
+  //   .match(
+  //     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  //   )) {
+
+  //     Swal.fire({
+  //       icon: "error",
+  //       title: "Oops...",
+  //       text: "Email is Not Valid!",
+  //     });
+
+  // } else {
+  //     // console.log("signup handler is working");
+  //     const userCredential = {
+  //       username: fullName,
+  //       email,
+  //       password,
+  //     };
+  //     // console.log(userCredential);
+
+  //     try {
+  //       const response = await axios.post(`/api/${SIGNUP_URL}`, userCredential);
+  //       console.log(response.data.data);
+  //       // .data.data
+  //       dispatch(signupSuccess(response.data.data));
+
+  //       if (response.statusText === "OK") {
+  //         Swal.fire({
+  //           title: "Good job!",
+  //           text: "user SignUp successfully!",
+  //           icon: "success",
+  //         });
+
+  //         setTimeout(() => {
+  //           navigate("/app");
+  //         }, 3000);
+  //       }
+  //     } catch (error) {
+  //       console.log(error);
+  //       console.log(error.response.data.message.includes('duplicate key'));
+  //       if(error.response.data.message.includes('duplicate key')){
+  //         Swal.fire({
+  //           icon: "error",
+  //           title: "Oops...",
+  //           text: `Email Already Registered`,
+  //         });
+  //       }
+  //     }
+  //   }
+  // };
 
   // const [capVal, setCapVal] = useState(null);
   // const myVariable = import.meta.env.VITE_SITE_KEY;
