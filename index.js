@@ -62,6 +62,13 @@ app.use(
 // app.get("/", (req, res) => {
 //   res.send("Hello, world!");
 // });
+app.use((req, res, next) => {
+  res.setTimeout(120000, () => { // 2 minutes timeout
+      res.status(504).send('Server timeout');
+  });
+  next();
+});
+
 app.use("/api/auth", UserRoute);
 app.use("/api/myCv", cvRoute);
 app.use("/api/website", websiteRoute);
