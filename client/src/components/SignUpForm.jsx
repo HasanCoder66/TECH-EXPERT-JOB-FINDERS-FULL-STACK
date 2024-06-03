@@ -39,13 +39,7 @@ function SignUpForm() {
         title: "Oops...",
         text: "Missing Fields!",
       });
-    } else if (password.length < 8) {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Password must be at least 8 characters long!",
-      });
-    } else if (password.length < 8) {
+    }  else if (password.length < 8) {
       Swal.fire({
         icon: "error",
         title: "Oops...",
