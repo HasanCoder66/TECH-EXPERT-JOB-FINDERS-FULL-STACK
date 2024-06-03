@@ -18,7 +18,7 @@ import WebsiteTemplateRoute from "./Routes/websiteTemplateRoute.js";
 import websiteRoute from "./Routes/webisteRoute.js";
 import path from "path";
 import Stripe from "stripe";
-
+import morgan from 'morgan'
 const __dirname = path.resolve();
 const MONGO = process.env.MONGO_URI
 const stripe = new Stripe(process.env.STRIPE);
@@ -45,6 +45,7 @@ const connectDB = () => {
 };
 
 // Middlewares=====>>>>
+app.use(morgan('combined'));
 app.use(cookieParser());
 app.use(express.json());
 app.use(bodyParser.json());
